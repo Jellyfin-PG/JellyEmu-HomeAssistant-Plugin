@@ -59,16 +59,16 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
         }
 
         try:
-            # 1. Fetch Active Sessions from Jellyfin
+            # Fetch Active Sessions from Jellyfin
             async with self.session.get(f"{self.url}/Sessions", headers=self.headers, timeout=10) as resp:
                 if resp.status == 200:
                     sessions = await resp.json()
                     data["active_sessions"] = self._parse_active_sessions(sessions)
                     data["active_count"] = len(data["active_sessions"])
 
-            # 2. Fetch Total Playtime across all users
+            # Fetch Total Playtime across all users
             try:
-                # 2a. Direct aggregate endpoint
+                #  Direct aggregate endpoint
                 async with self.session.get(
                     f"{self.url}/jellyemu/playtime/total", headers=self.headers, timeout=8
                 ) as resp:
@@ -78,7 +78,7 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
                     else:
                         raise ValueError("Fallback to per-user query")
             except Exception:
-                # 2b. Fallback: Query all users and sum their playtimes
+                # Fallback: Query all users and sum their playtimes
                 try:
                     async with self.session.get(
                         f"{self.url}/Users", headers=self.headers, timeout=8
@@ -103,7 +103,7 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
                 except Exception as ex:
                     _LOGGER.debug("Could not aggregate user playtimes: %s", ex)
 
-            # 3. Fetch Retro Games Catalog & Systems via standard Jellyfin API
+            # Fetch Retro Games Catalog & Systems via standard Jellyfin API
             try:
                 params = {
                     "IncludeItemTypes": "Book",
@@ -185,7 +185,7 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
                 seconds_elapsed = round(ticks / 10000000) if ticks else 0
 
                 tags = now_playing.get("Tags", [])
-                platform = tags[0] if tags else "Retro"
+                platform = resolve_system_platform(tags)
 
                 image_url = (
                     f"{self.url}/Items/{item_id}/Images/Primary?fillWidth=400&quality=90"
