@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Package and Upload Release Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package Integration Zip
+        run: |
+          # Package custom_components/jellyemu into jellyemu.zip
+          cd custom_components
+          zip -r ../jellyemu.zip jellyemu
+          cd ..
+
+      - name: Locate Card File
+        id: find-card
+        run: |
+          if [ -f "cards/jellyemu-card.js" ]; then
+            echo "CARD_PATH=cards/jellyemu-card.js" >> $GITHUB_ENV
+          elif [ -f "www/jellyemu-card.js" ]; then
+            echo "CARD_PATH=www/jellyemu-card.js" >> $GITHUB_ENV
+          fi
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            jellyemu.zip
+            ${{ env.CARD_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
