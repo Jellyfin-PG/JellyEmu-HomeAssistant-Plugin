@@ -15,7 +15,7 @@ Monitor active retro gaming sessions in real-time, track household playtimes and
   </a>
    
   <a href="images/lovelace-card.png">
-    <img src="images/lovelace-card.png" height="45" alt="Official Card" />
+    <img src="images/lovelace-card.png" height="45%" alt="Official Card" />
   </a>
 </p>
 <p align="center">
