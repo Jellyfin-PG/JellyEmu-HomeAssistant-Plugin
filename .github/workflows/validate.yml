@@ -1,0 +1,59 @@
+name: Validate
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate-syntax:
+    name: Validate Code Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify Python syntax
+        run: |
+          python -m py_compile custom_components/jellyemu/*.py
+
+      - name: Verify Card JavaScript syntax
+        run: |
+          if [ -f "cards/jellyemu-card.js" ]; then
+            node -c cards/jellyemu-card.js
+          elif [ -f "www/jellyemu-card.js" ]; then
+            node -c www/jellyemu-card.js
+          fi
+
+  validate-hacs:
+    name: Validate HACS Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: HACS Action
+        uses: hacs/action@main
+        with:
+          category: integration
+
+  validate-hassfest:
+    name: Validate Hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Hassfest
+        uses: home-assistant/actions/hassfest@master
