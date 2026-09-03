@@ -47,7 +47,6 @@ jobs:
         uses: hacs/action@main
         with:
           category: integration
-          ignore: "topics,description"
 
   validate-hassfest:
     name: Validate Hassfest
