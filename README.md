@@ -7,6 +7,23 @@ Monitor active retro gaming sessions in real-time, track household playtimes and
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <a href="images/device-settings.png">
+    <img src="images/device-settings.png" width="45%" alt="Device Settings" />
+  </a>
+   
+  <a href="images/lovelace-card.png">
+    <img src="images/lovelace-card.png" width="45%" alt="Official Card" />
+  </a>
+</p>
+<p align="center">
+  <em>Click on an image to view it full size.</em>
+</p>
+
+---
+
 ## Features
 
 - **Live Player Presence (`sensor.jellyemu_active_players`)**:
