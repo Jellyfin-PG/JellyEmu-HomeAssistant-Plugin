@@ -27,17 +27,55 @@ ATTR_PLATFORM = "platform"
 
 # Console theme colors for lovelace and automations
 PLATFORM_COLORS = {
+    # Nintendo
     "nes": "#E52521",
+    "nintendo": "#E52521",
     "snes": "#7B52AB",
+    "super nintendo": "#7B52AB",
     "n64": "#009E49",
+    "nintendo 64": "#009E49",
     "gb": "#8B956D",
+    "game boy": "#8B956D",
+    "gbc": "#8B956D",
+    "game boy color": "#8B956D",
     "gba": "#2E3192",
-    "nds": "#333333",
-    "segaMD": "#0055A5",
-    "segaSaturn": "#222222",
+    "game boy advance": "#2E3192",
+    "nds": "#E60012",
+    "nintendo ds": "#E60012",
+    "3ds": "#D12229",
+    "nintendo 3ds": "#D12229",
+    "gamecube": "#654597",
+    "wii": "#00A2E8",
+    "nintendo wii": "#00A2E8",
+    "switch": "#E60012",
+    "nintendo switch": "#E60012",
+    # Sega
+    "segamd": "#0055A5",
+    "sega genesis": "#0055A5",
+    "genesis": "#0055A5",
+    "master system": "#C8102E",
+    "game gear": "#2D68C4",
+    "sega saturn": "#222222",
+    "saturn": "#222222",
+    "dreamcast": "#FF6600",
+    # Sony
     "psx": "#003791",
+    "playstation": "#003791",
+    "ps1": "#003791",
+    "ps2": "#003791",
+    "playstation 2": "#003791",
+    "ps3": "#003791",
+    "playstation 3": "#003791",
     "psp": "#1E2A38",
+    "psvita": "#003791",
+    # Atari & Others
     "arcade": "#FFAA00",
+    "atari 2600": "#BA0C2F",
+    "atari 7800": "#BA0C2F",
+    "atari lynx": "#BA0C2F",
+    "turbografx-16": "#FF4500",
+    "neogeo pocket": "#FFCC00",
+    "dos": "#00FF00",
 }
 
 SYSTEM_ALIASES = {
@@ -107,13 +145,13 @@ def resolve_system_platform(tags: list[str]) -> str:
     if not tags:
         return "Retro"
 
-    # 1. Match against known system aliases first
+    # Match against known system aliases first
     for t in tags:
         normalized = t.strip().lower()
         if normalized in SYSTEM_ALIASES:
             return SYSTEM_ALIASES[normalized]
 
-    # 2. Filter out generic/region/metadata tags
+    # Filter out generic/region/metadata tags
     valid_tags = [t for t in tags if t.strip().lower() not in IGNORED_TAGS]
     if valid_tags:
         return valid_tags[0]
