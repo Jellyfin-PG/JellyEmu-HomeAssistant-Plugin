@@ -1,0 +1,25 @@
+launch_game:
+  name: Launch Game
+  description: Triggers a notification or event to open a JellyEmu retro game.
+  fields:
+    item_id:
+      name: Item ID
+      description: The Jellyfin item ID of the game ROM.
+      required: true
+      example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      selector:
+        text:
+    user_id:
+      name: User ID
+      description: Optional Jellyfin user ID to launch with user saves/preferences.
+      required: false
+      example: "a8b3c4d5e6f7"
+      selector:
+        text:
+    game_title:
+      name: Game Title
+      description: Display name of the game.
+      required: false
+      example: "Super Mario 64"
+      selector:
+        text:

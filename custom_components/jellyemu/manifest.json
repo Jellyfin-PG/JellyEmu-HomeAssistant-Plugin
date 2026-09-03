@@ -1,0 +1,12 @@
+{
+  "domain": "jellyemu",
+  "name": "JellyEmu",
+  "codeowners": ["@Jellyfin-PG"],
+  "config_flow": true,
+  "documentation": "https://github.com/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

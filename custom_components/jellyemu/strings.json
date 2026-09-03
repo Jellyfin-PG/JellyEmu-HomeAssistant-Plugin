@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Jellyfin / JellyEmu",
+        "description": "Enter the URL of your Jellyfin server and an API Key (generated in Jellyfin Dashboard → API Keys).",
+        "data": {
+          "url": "Server URL",
+          "api_key": "API Key",
+          "verify_ssl": "Verify SSL certificate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Jellyfin server. Please verify the URL and network connectivity.",
+      "invalid_auth": "Invalid API Key. Please verify the key in your Jellyfin Dashboard.",
+      "unknown": "Unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This Jellyfin server is already configured in Home Assistant."
+    }
+  }
+}
