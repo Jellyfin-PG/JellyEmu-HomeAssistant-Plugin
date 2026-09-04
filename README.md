@@ -1,12 +1,12 @@
 # JellyEmu for Home Assistant (HACS Integration & Dashboard Card)
 
 <p align="center">
-  <a href="https://github.com/Jellyfin-PG/JellyEmu/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/Jellyfin-PG/JellyEmu/release.yml" />
+  <a href="https://github.com/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin/release.yml" />
   </a>
 
-  <a href="https://github.com/Jellyfin-PG/JellyEmu/releases">
-    <img src="https://img.shields.io/github/downloads/Jellyfin-PG/JellyEmu/total?label=downloads" />
+  <a href="https://github.com/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin/releases">
+    <img src="https://img.shields.io/github/downloads/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin/total?label=downloads" />
   </a>
 
   <a href="https://hacs.xyz">
