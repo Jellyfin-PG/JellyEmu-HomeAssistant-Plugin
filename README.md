@@ -1,7 +1,22 @@
 # JellyEmu for Home Assistant (HACS Integration & Dashboard Card)
 
-[![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://hacs.xyz)
-[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2024.1+-blue.svg)](https://home-assistant.io)
+<p align="center">
+  <a href="https://github.com/Jellyfin-PG/JellyEmu/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Jellyfin-PG/JellyEmu/release.yml" />
+  </a>
+
+  <a href="https://github.com/Jellyfin-PG/JellyEmu/releases">
+    <img src="https://img.shields.io/github/downloads/Jellyfin-PG/JellyEmu/total?label=downloads" />
+  </a>
+
+  <a href="https://hacs.xyz">
+    <img src="https://img.shields.io/badge/HACS-Custom-orange.svg" alt="HACS Custom">
+  </a>
+  
+  <a href="https://home-assistant.io">
+    <img src="https://img.shields.io/badge/Home%20Assistant-2024.1+-blue.svg" alt="Home Assistant 2024.1+">
+  </a>
+</p>
 
 Monitor active retro gaming sessions in real-time, track household playtimes and leaderboards, trigger smart home lighting automations, and browse your retro game collection directly from Home Assistant.
 
