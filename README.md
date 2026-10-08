@@ -98,7 +98,7 @@ Monitor active retro gaming sessions in real-time, track household playtimes and
    ```
 2. In Home Assistant, go to **Settings** $\rightarrow$ **Dashboards** $\rightarrow$ **Three Dots** $\rightarrow$ **Resources**.
 3. Click **Add Resource**:
-   - **URL**: `/local/jellyemu-card.js?v=1.0.0`
+   - **URL**: `/local/jellyemu-card.js?v=1.0.1`
    - **Resource Type**: `JavaScript Module`
 4. Add the card to any dashboard using YAML:
    ```yaml

@@ -9,15 +9,45 @@
           "api_key": "API Key",
           "verify_ssl": "Verify SSL certificate"
         }
+      },
+      "reconfigure": {
+        "title": "Reconfigure JellyEmu",
+        "description": "Update the server URL or API Key for this JellyEmu connection.",
+        "data": {
+          "url": "Server URL",
+          "api_key": "API Key",
+          "verify_ssl": "Verify SSL certificate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Jellyfin server. Please verify the URL and network connectivity.",
+      "invalid_auth": "Invalid API Key. Please verify the key in your Jellyfin Dashboard.",
+      "wrong_server": "The server connected does not match the original Jellyfin server ID.",
+      "unknown": "Unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This Jellyfin server is already configured in Home Assistant.",
+      "reconfigure_successful": "Reconfiguration was successful.",
+      "wrong_server": "The server connected does not match the original Jellyfin server ID."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure JellyEmu Connection",
+        "description": "Update the server URL, API Key, or SSL verification settings.",
+        "data": {
+          "url": "Server URL",
+          "api_key": "API Key",
+          "verify_ssl": "Verify SSL certificate"
+        }
       }
     },
     "error": {
       "cannot_connect": "Failed to connect to Jellyfin server. Please verify the URL and network connectivity.",
       "invalid_auth": "Invalid API Key. Please verify the key in your Jellyfin Dashboard.",
       "unknown": "Unexpected error occurred."
-    },
-    "abort": {
-      "already_configured": "This Jellyfin server is already configured in Home Assistant."
     }
   }
 }

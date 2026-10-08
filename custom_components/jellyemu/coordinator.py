@@ -40,6 +40,7 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
     def headers(self) -> dict:
         """Standard Jellyfin authorization headers."""
         return {
+            "Authorization": f'MediaBrowser Token="{self.api_key}"',
             "X-Emby-Token": self.api_key,
             "Accept": "application/json",
         }
