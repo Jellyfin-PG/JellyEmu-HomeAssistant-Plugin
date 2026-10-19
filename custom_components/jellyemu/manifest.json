@@ -1,15 +1,15 @@
 {
   "domain": "jellyemu",
   "name": "JellyEmu",
+  "after_dependencies": [
+    "lovelace"
+  ],
   "codeowners": [
     "@Jellyfin-PG"
   ],
   "config_flow": true,
   "dependencies": [
     "http"
-  ],
-  "after_dependencies": [
-    "lovelace"
   ],
   "documentation": "https://github.com/Jellyfin-PG/JellyEmu-HomeAssistant-Plugin",
   "integration_type": "hub",
