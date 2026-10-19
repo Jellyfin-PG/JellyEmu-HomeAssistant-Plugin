@@ -90,21 +90,30 @@ Monitor active retro gaming sessions in real-time, track household playtimes and
 
 ---
 
-## Lovelace Card Installation (`jellyemu-card.js`)
+## Lovelace Card (`jellyemu-card.js`)
 
-1. Copy `cards/jellyemu-card.js` into your Home Assistant `/config/www/` folder:
-   ```text
-   /config/www/jellyemu-card.js
-   ```
-2. In Home Assistant, go to **Settings** $\rightarrow$ **Dashboards** $\rightarrow$ **Three Dots** $\rightarrow$ **Resources**.
-3. Click **Add Resource**:
-   - **URL**: `/local/jellyemu-card.js?v=1.0.1`
-   - **Resource Type**: `JavaScript Module`
-4. Add the card to any dashboard using YAML:
-   ```yaml
-   type: custom:jellyemu-card
-   title: "JellyEmu Retro Gaming"
-   ```
+The JellyEmu Lovelace card is shipped directly inside the integration under `custom_components/jellyemu/www/` and is served from `/jellyemu/jellyemu-card.js`.
+
+### Automatic Registration (Recommended)
+When the JellyEmu integration sets up, it **automatically registers** the card as a Lovelace dashboard resource. No manual file copying or resource configuration is required!
+
+Simply add the card to any dashboard:
+
+```yaml
+type: custom:jellyemu-card
+title: "JellyEmu Retro Gaming"
+```
+
+### Manual / YAML Mode Dashboards (Optional)
+If you manage your dashboard resources manually or via YAML mode in `configuration.yaml`, add the resource reference:
+
+```yaml
+lovelace:
+  mode: yaml
+  resources:
+    - url: /jellyemu/jellyemu-card.js
+      type: module
+```
 
 ---
 
