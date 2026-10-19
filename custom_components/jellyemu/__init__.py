@@ -8,6 +8,7 @@ from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EVENT_HOMEASSISTANT_STARTED
 from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.helpers import config_validation as cv
 
 from .const import DOMAIN, PLATFORMS, SERVICE_LAUNCH_GAME, ATTR_ITEM_ID, ATTR_USER_ID, ATTR_GAME_TITLE
 from .coordinator import JellyEmuCoordinator
@@ -86,6 +87,9 @@ async def async_register_card(hass: HomeAssistant) -> None:
         await _async_register_resource()
     else:
         hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STARTED, _async_register_resource)
+
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:

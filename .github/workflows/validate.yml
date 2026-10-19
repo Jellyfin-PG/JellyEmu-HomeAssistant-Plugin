@@ -2,9 +2,15 @@ name: Validate
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+    tags:
+      - 'v*'
+      - '[0-9]+.[0-9]+.[0-9]+*'
   pull_request:
-    branches: [main, master]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   validate-syntax:
@@ -32,6 +38,8 @@ jobs:
         run: |
           if [ -f "cards/jellyemu-card.js" ]; then
             node -c cards/jellyemu-card.js
+          elif [ -f "custom_components/jellyemu/www/jellyemu-card.js" ]; then
+            node -c custom_components/jellyemu/www/jellyemu-card.js
           elif [ -f "www/jellyemu-card.js" ]; then
             node -c www/jellyemu-card.js
           fi
