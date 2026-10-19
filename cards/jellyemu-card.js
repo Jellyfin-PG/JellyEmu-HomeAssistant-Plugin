@@ -726,11 +726,12 @@ class JellyEmuCard extends HTMLElement {
         grid.innerHTML = filtered.map(game => {
             const playUrl = this._serverUrl ? `${this._serverUrl}/jellyemu/play/${game.id}` : (game.play_url || '#');
             const detailsUrl = this._serverUrl ? `${this._serverUrl}/web/index.html#!/details?id=${game.id}` : (game.details_url || '#');
+            const imageUrl = game.image || (this._serverUrl && game.id ? `${this._serverUrl}/Items/${game.id}/Images/Primary?fillWidth=300&quality=85` : '');
 
             return `
                 <div class="MuiCard-root">
                     <a href="${detailsUrl}" target="_blank" style="text-decoration: none;">
-                        <img class="MuiCardMedia-media" src="${game.image}" alt="${game.name}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 133\\' fill=\\'%231a1a1a\\'><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-size=\\'11\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>No Art</text></svg>'" />
+                        <img class="MuiCardMedia-media" src="${imageUrl}" alt="${game.name}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 133\\' fill=\\'%231a1a1a\\'><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-size=\\'11\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>No Art</text></svg>'" />
                     </a>
                     <div class="MuiCardContent-root">
                         <a class="MuiCardContent-title" href="${detailsUrl}" target="_blank" title="View in Jellyfin">${game.name}</a>

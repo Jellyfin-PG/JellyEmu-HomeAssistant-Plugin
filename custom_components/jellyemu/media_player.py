@@ -45,7 +45,7 @@ class JellyEmuSessionMediaPlayer(CoordinatorEntity[JellyEmuCoordinator], MediaPl
             "name": "JellyEmu Server",
             "manufacturer": "Jellyfin / JellyEmu",
             "model": "Emulation & Retro Gaming Hub",
-            "sw_version": "1.0.1",
+            "sw_version": "1.0.2",
             "configuration_url": self.coordinator.url,
         }
 

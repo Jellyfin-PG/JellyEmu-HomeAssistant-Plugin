@@ -135,7 +135,6 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
                     platform = resolve_system_platform(raw_tags)
                     systems_found.add(platform)
 
-                    image_url = f"{self.url}/Items/{item_id}/Images/Primary?fillWidth=300&quality=85&api_key={self.api_key}"
                     play_url = f"{self.url}/jellyemu/play/{item_id}"
                     details_url = f"{self.url}/web/index.html#!/details?id={item_id}"
 
@@ -144,7 +143,6 @@ class JellyEmuCoordinator(DataUpdateCoordinator):
                             "id": item_id,
                             "name": name,
                             "platform": platform,
-                            "image": image_url,
                             "play_url": play_url,
                             "details_url": details_url,
                             "year": item.get("PremiereDate", "")[:4] if item.get("PremiereDate") else "",
