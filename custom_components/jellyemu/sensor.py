@@ -47,7 +47,7 @@ class JellyEmuBaseSensor(CoordinatorEntity[JellyEmuCoordinator], SensorEntity):
             "name": "JellyEmu Server",
             "manufacturer": "Jellyfin / JellyEmu",
             "model": "Emulation & Retro Gaming Hub",
-            "sw_version": "1.0.2",
+            "sw_version": "1.0.3",
             "configuration_url": self.coordinator.url,
         }
 

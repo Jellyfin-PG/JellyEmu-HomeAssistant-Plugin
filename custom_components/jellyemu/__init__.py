@@ -1,5 +1,4 @@
 """The JellyEmu Home Assistant Integration."""
-import json
 import logging
 from pathlib import Path
 
@@ -9,6 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EVENT_HOMEASSISTANT_STARTED
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers import config_validation as cv
+from homeassistant.loader import async_get_integration
 
 from .const import DOMAIN, PLATFORMS, SERVICE_LAUNCH_GAME, ATTR_ITEM_ID, ATTR_USER_ID, ATTR_GAME_TITLE
 from .coordinator import JellyEmuCoordinator
@@ -16,23 +16,9 @@ from .coordinator import JellyEmuCoordinator
 _LOGGER = logging.getLogger(__name__)
 
 
-def _get_card_version() -> str:
-    """Read version from manifest.json."""
-    manifest_path = Path(__file__).parent / "manifest.json"
-    if manifest_path.is_file():
-        try:
-            with open(manifest_path, encoding="utf-8") as f:
-                return json.load(f).get("version", "1.0.0")
-        except Exception:
-            pass
-    return "1.0.0"
-
-
 async def async_register_card(hass: HomeAssistant) -> None:
     """Register JellyEmu card static path and dashboard resource."""
     www_dir = Path(__file__).parent / "www"
-    if not www_dir.is_dir():
-        return
 
     # Register static path to serve custom_components/jellyemu/www under /jellyemu
     if not hass.data.get(DOMAIN, {}).get("static_path_registered"):
@@ -62,7 +48,8 @@ async def async_register_card(hass: HomeAssistant) -> None:
             if hasattr(resources, "loaded") and not resources.loaded:
                 await resources.async_load()
 
-            card_version = _get_card_version()
+            integration = await async_get_integration(hass, DOMAIN)
+            card_version = str(integration.version) if integration.version else "1.0.0"
             card_url = f"/jellyemu/jellyemu-card.js?v={card_version}"
 
             items = resources.async_items() if hasattr(resources, "async_items") else []
@@ -137,7 +124,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         persistent_notification.async_create(
             hass,
             f"Click here to play **[{title}]({play_url})** on your device.",
-            title="🎮 JellyEmu Ready to Play",
+            title="JellyEmu Ready to Play",
             notification_id=f"jellyemu_launch_{item_id}",
         )
 

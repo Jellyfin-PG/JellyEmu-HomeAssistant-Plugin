@@ -58,6 +58,16 @@ function resolvePlatform(tags) {
     return "Retro";
 }
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 class JellyEmuCard extends HTMLElement {
     constructor() {
         super();
@@ -563,7 +573,7 @@ class JellyEmuCard extends HTMLElement {
                             </svg>
                         </div>
                         <div>
-                            <h2 class="MuiTypography-h6">${this._config.title || 'JellyEmu'}</h2>
+                            <h2 class="MuiTypography-h6">${escapeHtml(this._config.title || 'JellyEmu')}</h2>
                             <p class="MuiTypography-body2" id="je-game-count">-- Games</p>
                         </div>
                     </div>
@@ -724,24 +734,32 @@ class JellyEmuCard extends HTMLElement {
         }
 
         grid.innerHTML = filtered.map(game => {
-            const playUrl = this._serverUrl ? `${this._serverUrl}/jellyemu/play/${game.id}` : (game.play_url || '#');
-            const detailsUrl = this._serverUrl ? `${this._serverUrl}/web/index.html#!/details?id=${game.id}` : (game.details_url || '#');
-            const imageUrl = game.image || (this._serverUrl && game.id ? `${this._serverUrl}/Items/${game.id}/Images/Primary?fillWidth=300&quality=85` : '');
+            const gameId = encodeURIComponent(game.id || '');
+            const playUrl = this._serverUrl ? `${this._serverUrl}/jellyemu/play/${gameId}` : (game.play_url || '#');
+            const detailsUrl = this._serverUrl ? `${this._serverUrl}/web/index.html#!/details?id=${gameId}` : (game.details_url || '#');
+            const imageUrl = game.image || (this._serverUrl && game.id ? `${this._serverUrl}/Items/${gameId}/Images/Primary?fillWidth=300&quality=85` : '');
+
+            const safeName = escapeHtml(game.name || 'Unknown Game');
+            const safePlatform = escapeHtml(game.platform || 'Retro');
+            const safeYear = escapeHtml(game.year || '');
+            const safePlayUrl = escapeHtml(playUrl);
+            const safeDetailsUrl = escapeHtml(detailsUrl);
+            const safeImageUrl = escapeHtml(imageUrl);
 
             return `
                 <div class="MuiCard-root">
-                    <a href="${detailsUrl}" target="_blank" style="text-decoration: none;">
-                        <img class="MuiCardMedia-media" src="${imageUrl}" alt="${game.name}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 133\\' fill=\\'%231a1a1a\\'><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-size=\\'11\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>No Art</text></svg>'" />
+                    <a href="${safeDetailsUrl}" target="_blank" style="text-decoration: none;">
+                        <img class="MuiCardMedia-media" src="${safeImageUrl}" alt="${safeName}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 133\\' fill=\\'%231a1a1a\\'><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-size=\\'11\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>No Art</text></svg>'" />
                     </a>
                     <div class="MuiCardContent-root">
-                        <a class="MuiCardContent-title" href="${detailsUrl}" target="_blank" title="View in Jellyfin">${game.name}</a>
+                        <a class="MuiCardContent-title" href="${safeDetailsUrl}" target="_blank" title="View in Jellyfin">${safeName}</a>
                         <div class="MuiCardContent-meta">
-                            <span class="MuiCardContent-badge">${game.platform}</span>
-                            <span>${game.year || ''}</span>
+                            <span class="MuiCardContent-badge">${safePlatform}</span>
+                            <span>${safeYear}</span>
                         </div>
                     </div>
                     <div class="MuiCardActions-root">
-                        <a class="MuiButton-root MuiButton-containedPrimary" href="${playUrl}" target="_blank" title="Play ${game.name}">
+                        <a class="MuiButton-root MuiButton-containedPrimary" href="${safePlayUrl}" target="_blank" title="Play ${safeName}">
                             <svg class="MuiSvgIcon-root" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z"/></svg>
                             Play
                         </a>
@@ -890,7 +908,7 @@ class JellyEmuCardEditor extends HTMLElement {
                 <!-- Card Title -->
                 <div class="je-field">
                     <label class="je-label">Card Title</label>
-                    <input class="je-input" id="cfg-title" type="text" value="${this._config.title || 'JellyEmu'}" />
+                    <input class="je-input" id="cfg-title" type="text" value="${escapeHtml(this._config.title || 'JellyEmu')}" />
                 </div>
 
                 <!-- Layout & Sizing Settings -->
