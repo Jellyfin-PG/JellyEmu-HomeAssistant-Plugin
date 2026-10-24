@@ -916,12 +916,12 @@ class JellyEmuCardEditor extends HTMLElement {
                     <div class="je-field">
                         <label class="je-label">Visible Rows</label>
                         <span class="je-sublabel">Rows shown before vertical scroll</span>
-                        <input class="je-input" id="cfg-rows" type="number" min="1" max="10" value="${this._config.max_rows || 1}" />
+                        <input class="je-input" id="cfg-rows" type="number" min="1" max="10" value="${parseInt(this._config.max_rows) || 1}" />
                     </div>
                     <div class="je-field">
                         <label class="je-label">Card Min-Width (px)</label>
                         <span class="je-sublabel">Columns fill width automatically</span>
-                        <input class="je-input" id="cfg-colwidth" type="number" min="100" max="300" step="10" value="${this._config.column_width || 132}" />
+                        <input class="je-input" id="cfg-colwidth" type="number" min="100" max="300" step="10" value="${parseInt(this._config.column_width) || 132}" />
                     </div>
                 </div>
 
